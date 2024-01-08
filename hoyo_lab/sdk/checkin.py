@@ -4,9 +4,21 @@ from datetime import datetime
 from os import path
 import json
 
-def checkin(ltuid:int, ltoken:str, games:list): # Claims MiHoyo Games dailies
-    cookies = {"ltuid":ltuid, "ltoken":ltoken}
+# TODO: Fix no "hoyolab id set" warning for accounts using ltmid_v2
+
+def checkin(ltuid:int|str, ltoken:str, games:list): # Claims MiHoyo Games dailies
+    cookies = {}
     
+    if isinstance(ltuid,int):
+        cookies["ltuid"] = ltuid
+    else:
+        cookies["ltmid_v2"] = ltuid
+
+    if "v2" not in ltoken:
+        cookies["ltoken"] = ltoken
+    else:
+        cookies["ltoken_v2"] = ltoken
+        
     async def claim(hoyo_game): 
         client = genshin.Client(cookies, game=hoyo_game)
         user = await client.get_game_accounts()
@@ -48,6 +60,9 @@ def fischl(): # Main function
         users = json.load(users)
         
     for user in users:
-        checkin(user["ltuid"],user["ltoken"],user["games"])
-        
-fischl()
+        ltuid = user.get("ltuid", user.get("ltmid_v2"))
+        ltoken = user.get("ltoken", user.get("ltoken_v2"))
+        checkin(ltuid,ltoken,user["games"])
+
+if __name__ == '__main__':
+    fischl()
