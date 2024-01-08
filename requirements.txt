@@ -1,2 +1,2 @@
-genshin
-json
+genshin[cookies,rsa]
+rsa
