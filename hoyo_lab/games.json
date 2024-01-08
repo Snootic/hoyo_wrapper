@@ -1,6 +1,5 @@
 {
-    "gi": "genshin",
-    "hsr": "hkrpg",
-    "hi3": "honkai3rd",
-    "zzz": "zzz"
+    "hk4e_global": "genshin",
+    "hkrpg_global": "hkrpg",
+    "bh3_global": "honkai3rd"
 }
