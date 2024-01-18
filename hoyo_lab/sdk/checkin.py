@@ -21,9 +21,7 @@ def checkin(nickname, games:list): # Claims MiHoyo Games dailies
         print(message,game,user)
         log(message,game,user)
     
-    supported_games = path.abspath("hoyo_lab/games.json")
-    with open(supported_games, "r") as supported_games:
-        hoyo_games = json.load(supported_games)
+    hoyo_games = cookies_setup.list_games()
     
     for game in hoyo_games:
         if game["game_biz"] in games:

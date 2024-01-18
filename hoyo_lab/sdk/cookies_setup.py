@@ -38,3 +38,9 @@ def setup_cookies(get_nickname:bool = False, nickname: str = ''):
                 if ltmid_v2:
                     cookies["ltmid_v2"] = ltmid_v2
                 return cookies
+
+def list_games():
+    supported_games = abspath("hoyo_lab/games.json")
+    with open(supported_games, "r") as supported_games:
+        hoyo_games = json.load(supported_games)
+    return hoyo_games
