@@ -1,24 +1,10 @@
-import asyncio
-import genshin
+import asyncio, genshin, json, cookies_setup
 from datetime import datetime
 from os import path
-import json
 
-# TODO: Fix no "hoyolab id set" warning for accounts using ltmid_v2
-
-def checkin(ltuid:int|str, ltoken:str, games:list): # Claims MiHoyo Games dailies
-    cookies = {}
+def checkin(nickname, games:list): # Claims MiHoyo Games dailies
+    cookies = cookies_setup.setup_cookies(nickname=nickname)
     
-    if isinstance(ltuid,int):
-        cookies["ltuid"] = ltuid
-    else:
-        cookies["ltmid_v2"] = ltuid
-
-    if "v2" not in ltoken:
-        cookies["ltoken"] = ltoken
-    else:
-        cookies["ltoken_v2"] = ltoken
-        
     async def claim(game_name): 
         client = genshin.Client(cookies, game=game_name)
         user = await client.get_game_accounts()
@@ -61,9 +47,8 @@ def fischl(): # Main function
         users = json.load(users)
         
     for user in users:
-        ltuid = user.get("ltuid", user.get("ltmid_v2"))
-        ltoken = user.get("ltoken", user.get("ltoken_v2"))
-        checkin(ltuid,ltoken,user["games"])
+        nickname = user.get('hoyolab_nickname')
+        checkin(nickname,user["games"])
 
 if __name__ == '__main__':
     fischl()
