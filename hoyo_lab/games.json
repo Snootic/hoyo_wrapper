@@ -1,5 +1,17 @@
-{
-    "hk4e_global": "genshin",
-    "hkrpg_global": "hkrpg",
-    "bh3_global": "honkai3rd"
-}
+[
+    {
+        "game_name": "honkai3rd",
+        "game_biz": "bh3_global",
+        "game_id": 1
+    },
+    {
+        "game_name": "genshin",
+        "game_biz": "hk4e_global",
+        "game_id": 2
+    },
+    {
+        "game_name": "hkrpg",
+        "game_biz": "hkrpg_global",
+        "game_id": 6
+    }
+]

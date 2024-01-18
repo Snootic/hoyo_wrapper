@@ -19,8 +19,8 @@ def checkin(ltuid:int|str, ltoken:str, games:list): # Claims MiHoyo Games dailie
     else:
         cookies["ltoken_v2"] = ltoken
         
-    async def claim(hoyo_game): 
-        client = genshin.Client(cookies, game=hoyo_game)
+    async def claim(game_name): 
+        client = genshin.Client(cookies, game=game_name)
         user = await client.get_game_accounts()
         user = user[1].nickname
         game = client.game.name
@@ -39,13 +39,14 @@ def checkin(ltuid:int|str, ltoken:str, games:list): # Claims MiHoyo Games dailie
     with open(supported_games, "r") as supported_games:
         hoyo_games = json.load(supported_games)
     
-    for i in games:
-        try:
-            asyncio.run(claim(hoyo_games[i]))
-        except:
-            error = f'Game not supported by hoyolab'
-            print( error)
-            log(error, i)
+    for game in hoyo_games:
+        if game["game_biz"] in games:
+            try:
+                asyncio.run(claim(game["game_name"]))
+            except Exception as e:
+                error = f'{e}'
+                print( error)
+                log(error, game["game_name"])
 
 def log(message, game, user=''):  # Saves the results in a log file
     checkin_log = f"{datetime.now()} - {user} {game}: {message}\n"
