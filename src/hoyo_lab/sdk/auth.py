@@ -117,29 +117,12 @@ async def set_cookies(account, password): # set browser cookies by logging in wi
         return result
 
 async def save_cookies(cookies): # saves the cookies to json
-    ltuid = cookies.get("ltuid", cookies.get("ltmid_v2")) # defines what cookies will be used
-    ltoken = cookies.get("ltoken", cookies.get("ltoken_v2"))
-    lang = cookies.get("ltoken", cookies.get("mi18nLang"))
-    
-    client_cookies = {}
-    
-    if "ltuid" in cookies:
-        client_cookies["ltuid"] = ltuid
-    else:
-        client_cookies["ltmid_v2"] = ltuid
-
-    if "ltoken" in cookies:
-        client_cookies["ltoken"] = ltoken
-    else:
-        client_cookies["ltoken_v2"] = ltoken
-    
-    client_cookies["mi18nLang"] = lang
-    print(cookies)
-    print(client_cookies)
     try:
-        client = genshin.Client(client_cookies, debug=True)
+        client = genshin.Client(cookies, debug=True)
         
-        hoyolab_account = await client.get_hoyolab_user(cookies["ltuid_v2"])
+        print(client.cookie_manager)
+        
+        hoyolab_account = await client.get_hoyolab_user(cookies["ltuid_v2"], lang=cookies["mi18nLang"])
         nickname = hoyolab_account.nickname # gets user's nickname in hoyolab
     except Exception as e:
         return e
