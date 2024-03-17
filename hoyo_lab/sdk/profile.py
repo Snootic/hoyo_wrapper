@@ -33,13 +33,13 @@ async def build_profile(id: int = 0): # build user profile based on id
 async def genshin_chronicle(uid:int = 0,server='America Server'):
     # Gets the battle chronicle of the player
     
-    def print_info(account):
+    async def print_info(account):
         user = await client.get_genshin_user(uid)
         for value in user:
             for item in value:
                 print(item.upper() if item == value[0] else item,'\n')
                 
-    def print_characterirt
+    # def print_characterirt
     
     if uid == 0:
         user_accounts = await client.get_game_accounts()
