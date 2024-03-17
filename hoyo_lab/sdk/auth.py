@@ -137,8 +137,8 @@ async def save_cookies(cookies): # saves the cookies to json
         
         hoyolab_account = await client.get_hoyolab_user(cookies["ltuid_v2"])
         nickname = hoyolab_account.nickname # gets user's nickname in hoyolab
-    except:
-        return "Ocorreu um erro, verifique seu navegador e se sua conta está logada e tente novamente"
+    except Exception as e:
+        return e
     
     cookies["hoyolab_nickname"] = nickname
 
@@ -155,9 +155,12 @@ async def save_cookies(cookies): # saves the cookies to json
     cookies["games"] = games # adds the games to the cookies
     
     user_data = abspath("user_data.json")
-    with open(user_data, 'r') as users: # loads the old users_data.json file
-        users = json.load(users)
-
+    users = []
+    try:
+        with open(user_data, 'r') as users: # loads the old users_data.json file
+            users = json.load(users)
+    except:
+        pass
     users.append(cookies) # append the new cookies to the json file
     
     with open(user_data, "w") as new_users:
