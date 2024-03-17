@@ -91,8 +91,8 @@ def browser_cookies(browser=None):
                                                                             "account_mid_v2",
                                                                             "cookie_token_v2",
                                                                             "ltmid_v2"))
-    except:
-        return "Ocorreu um erro, verifique seu navegador e se sua conta está logada e tente novamente"
+    except Exception as e:
+        return f"{e}: Ocorreu um erro, verifique seu navegador e tente novamente"
 
     if cookies is not None:
         result = asyncio.run(save_cookies(cookies))
