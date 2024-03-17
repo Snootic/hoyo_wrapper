@@ -29,6 +29,28 @@ async def build_profile(id: int = 0): # build user profile based on id
         
     return account, record_data
 
+
+async def genshin_chronicle(uid:int = 0,server='America Server'):
+    # Gets the battle chronicle of the player
+    
+    def print_info(account):
+        user = await client.get_genshin_user(uid)
+        for value in user:
+            for item in value:
+                print(item.upper() if item == value[0] else item,'\n')
+                
+    def print_characterirt
+    
+    if uid == 0:
+        user_accounts = await client.get_game_accounts()
+        if isinstance(user_accounts,list):
+            for account in user_accounts:
+                if account.game_biz == 'hk4e_global' and account.server_name == server:
+                    user = await client.get_genshin_user(account.uid)
+                    print_info(account)
+    else:
+        await print_account(uid)
+
 async def lisa(): # menu
     choose = int(input("[1] - Search Users, [2] - See own profile: "))
     if choose == 1:
@@ -49,6 +71,9 @@ async def lisa(): # menu
                 return
     elif choose == 2:
         await build_profile()
+        return
+    elif choose == 3:
+        await genshin_chronicle()
         return
 
 if __name__ == "__main__":
