@@ -88,8 +88,7 @@ def log(message:str, game:str, log_type:str, user:str = ''):  # Saves the result
     log_path = path.abspath(f"logs/{log_type}.log")
     with open(log_path, "a") as jean:
         jean.writelines(log)
-    
-cookies = cookies_setup.setup_cookies(nickname="Snootic")
 
 if __name__ == "__main__":
+    cookies = cookies_setup.setup_cookies(nickname="Snootic")
     asyncio.run(code_claim(game_name="hkrpg"))
