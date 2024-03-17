@@ -119,6 +119,7 @@ async def set_cookies(account, password): # set browser cookies by logging in wi
 async def save_cookies(cookies): # saves the cookies to json
     ltuid = cookies.get("ltuid", cookies.get("ltmid_v2")) # defines what cookies will be used
     ltoken = cookies.get("ltoken", cookies.get("ltoken_v2"))
+    lang = cookies.get("ltoken", cookies.get("mi18nLang"))
     
     client_cookies = {}
     
@@ -132,6 +133,8 @@ async def save_cookies(cookies): # saves the cookies to json
     else:
         client_cookies["ltoken_v2"] = ltoken
     
+    client_cookies["mi18nLang"] = lang
+    print(cookies)
     print(client_cookies)
     try:
         client = genshin.Client(client_cookies, debug=True)
@@ -142,8 +145,6 @@ async def save_cookies(cookies): # saves the cookies to json
         return e
     
     cookies["hoyolab_nickname"] = nickname
-
-    print(cookies)
     
     user_accounts = await client.get_game_accounts() # get all games accounts the user have
     games = []
