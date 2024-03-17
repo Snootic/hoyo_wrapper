@@ -90,9 +90,10 @@ def browser_cookies(browser=None):
                                                                             "ltoken_v2",
                                                                             "account_mid_v2",
                                                                             "cookie_token_v2",
-                                                                            "ltmid_v2"))
+                                                                            "ltmid_v2",
+                                                                            "mi18nLang"))
     except Exception as e:
-        return f"{e}: Ocorreu um erro, verifique seu navegador e tente novamente"
+        return f"{e}: Ocorreu um erro, tente novamente"
 
     if cookies is not None:
         result = asyncio.run(save_cookies(cookies))
