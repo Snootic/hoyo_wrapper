@@ -154,7 +154,7 @@ async def save_cookies(cookies): # saves the cookies to json
             
     cookies["games"] = games # adds the games to the cookies
     
-    user_data = abspath("hoyo_lab/user_data.json")
+    user_data = abspath("user_data.json")
     with open(user_data, 'r') as users: # loads the old users_data.json file
         users = json.load(users)
 
