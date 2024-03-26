@@ -33,7 +33,7 @@ async def code_claim(game_name:str,redeem_code:str|None=None):
     user = user[1].nickname
     game = client.game.name
     
-    code_file_path = path.abspath(f"hoyo_lab/{user}_{game}_redeemed_codes.txt")
+    code_file_path = path.abspath(f"src/hoyo_lab/{user}_{game}_redeemed_codes.txt")
     
     redeemed_codes = []
     
@@ -90,5 +90,5 @@ def log(message:str, game:str, log_type:str, user:str = ''):  # Saves the result
         jean.writelines(log)
 
 if __name__ == "__main__":
-    cookies = cookies_setup.setup_cookies(nickname="Snootic")
-    asyncio.run(code_claim(game_name="hkrpg"))
+    cookies = cookies_setup.setup_cookies(nickname="Nestaky")
+    asyncio.run(code_claim(game_name="genshin"))

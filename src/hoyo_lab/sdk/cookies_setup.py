@@ -2,7 +2,7 @@ import genshin, asyncio, json
 from os.path import abspath
 
 def setup_cookies(get_nickname:bool = False, nickname: str = ''):
-    user_data = abspath("hoyo_lab/user_data.json")
+    user_data = abspath("src/hoyo_lab/user_data.json")
     with open(user_data, "r") as users:
         users = json.load(users)
     
@@ -19,7 +19,7 @@ def setup_cookies(get_nickname:bool = False, nickname: str = ''):
                 return user
 
 def list_games():
-    supported_games = abspath("hoyo_lab/games.json")
+    supported_games = abspath("src/hoyo_lab/games.json")
     with open(supported_games, "r") as supported_games:
         hoyo_games = json.load(supported_games)
     return hoyo_games

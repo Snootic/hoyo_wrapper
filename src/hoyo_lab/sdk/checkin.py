@@ -40,7 +40,8 @@ def log(message, game, user=''):  # Saves the results in a log file
         amber.writelines(checkin_log)
 
 def fischl(): # Main function
-    user_data = path.abspath("hoyo_lab/user_data.json")
+    user_data = path.abspath("src/hoyo_lab/user_data.json")
+    print(user_data)
     with open(user_data, "r") as users:
         users = json.load(users)
         
