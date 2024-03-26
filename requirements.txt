@@ -1,3 +1,5 @@
 genshin[cookies,rsa]
 rsa
 tk
+requests
+bs4
