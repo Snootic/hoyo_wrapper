@@ -119,10 +119,10 @@ async def set_cookies(account, password): # set browser cookies by logging in wi
 async def save_cookies(cookies): # saves the cookies to json
     try:
         client = genshin.Client(cookies, debug=True)
-        
+    
         print(client.cookie_manager)
-        
-        hoyolab_account = await client.get_hoyolab_user(cookies["ltuid_v2"], lang=cookies["mi18nLang"])
+    
+        hoyolab_account = await client.get_hoyolab_user(cookies["ltuid_v2"], lang=cookies.get("mi18nLang"))
         nickname = hoyolab_account.nickname # gets user's nickname in hoyolab
     except Exception as e:
         return e
@@ -139,7 +139,7 @@ async def save_cookies(cookies): # saves the cookies to json
             
     cookies["games"] = games # adds the games to the cookies
     
-    user_data = abspath("user_data.json")
+    user_data = abspath("src/hoyo_lab/user_data.json")
     users = []
     try:
         with open(user_data, 'r') as users: # loads the old users_data.json file
